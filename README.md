@@ -8,9 +8,12 @@ A note regarding the first video [Tic Tac Toe video 1][def2]:
 
 ![Alt text](image-1.png)
 
+Here's [Video 2][def3]. That was a fun time and I learned a great deal.
+
 This is the playlist I am listening to on Apple Music lately while I learn. It's very conducive to learning as the title suggests would be the case.
 
 ![Headspace playlist on Apple Music](image.png)
 
 [def]: https://www.techwithtim.net/
 [def2]: https://www.youtube.com/watch?v=5s_lGC2sxwQ
+[def3]: https://www.youtube.com/watch?v=jAaJZLqryTI

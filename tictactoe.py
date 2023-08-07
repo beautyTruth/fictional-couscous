@@ -1,5 +1,7 @@
 # a fun little tic tac to game in Python
 
+import random
+
 board = [' ' for x in range(10)]
 
 def insert_letter(letter, pos):
@@ -48,42 +50,79 @@ def player_move():
             else:
                 print('Please type a number between 1 and 9!')
         except:
-            print('Please follow the instruction and choose a number between 1 and 9')
+            print('Please follow the instructions and choose a number between 1 and 9.')
 
 def comp_move():
-    pass
+    possible_moves = [x for x,letter in enumerate(board) if letter == ' ' and x != 0]
+    move = 0
 
-def select_random(board):
-    pass
+    for let in ['O', 'X']:
+        for i in possible_moves:
+            board_copy = board[:]
+            board_copy[1] = let
+            if is_winner(board_copy, let):
+                move = i
+                return move
+    
+    corners_open = []
+    for i in possible_moves:
+        if i in [1,3,7,9]:
+            corners_open.append(i)
+
+    if len(corners_open) > 0:
+        move = select_random(corners_open)
+        return move
+    
+    if 5 in possible_moves:
+        move = 5
+        return move
+    
+    edges_open = []
+    for i in possible_moves:
+        if i in [2,4,6,8]:
+            edges_open.append(i)
+
+    if len(edges_open) > 0:
+        move = select_random(edges_open)
+    
+    return move
+
+def select_random(li):
+    ln = len(li)
+    r = random.randrange(0,ln)
+    return li[r]
 
 def is_board_full(board):
     if board.count(' ') > 1:
-        return True
-    else:
         return False
+    else:
+        return True
 
 def main():
     print('Welcome to Tic Tac Toe, Player!')
-    print_board()
+    print_board(board)
 
     while not(is_board_full(board)):
         if not(is_winner(board,'O')):
             player_move()
-            print_board()
+            print_board(board)
         else:
             print("LOL, the computer beat you!")
             break
         
         if not(is_winner(board,'X')):
-            comp_move()
-            print_board()
+            move = comp_move()
+            if move == 0:
+                print("lol, you tied a computer in tic tac toe!")
+            else:
+                insert_letter('O', move)
+                print("Computer placed an 'O' in position", move, ":")
+                print_board(board)
         else:
             print("Oh jees wow you beat the computer in tic tac toe!")
             break
 
     if is_board_full(board):
-        print('You tied with a computer, lol!')
+        print('The game is over.')
 
 main()
-
-print_board(board)
